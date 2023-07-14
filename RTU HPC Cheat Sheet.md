@@ -109,24 +109,26 @@ qsub -l nodes=wn61:ppn=48 -q long
 qsub -q long -l nodes=1:ppn=48, feature=epyc7f72
 ```
 
-### Copy trhough GDN node to/from hpc and sizif
+### Copy trhough GDN node to/from hpc and remote server
 
 [**Manual**](https://lftp.yar.ru/lftp-man.html)
 
-While copying from/to RTU HPC errors can happen and by using programs like *scp* erorrs can be missed.
+While copying from/to RTU HPC errors can happen and programs like *scp* doesn't resume upload if this happens.
 
-To connect GDN node from BMC NAS lftp can be used:  
+To connect GDN node from BMC NAS lftp can be used that resumes upload when network conection error happen.
+This elelminates problems when working with large file sizes 
 
 ``` bash 
-# change user name to NAS user. same as sizif
-lftp -u username -p 989 ftp://10.245.1.147  -e " set ssl:verify-certificate no"
+# change user name to NAS username. same as user on remote ftp server.
+
+lftp -u username -p 989 ftp://<ip addres>  -e " set ssl:verify-certificate no"
 
 # set if error -> ls: Fatal error: Certificate verification: Not trusted
 # there might be safer option.
 set ssl:verify-certificate no
 ```
 
-where *username* is NAS username (same as ***sizif*** )
+where *username* is NAS username (same as ***ftp server*** )
 
 ### Copy
 
