@@ -121,7 +121,7 @@ This elelminates problems when working with large file sizes
 ``` bash 
 # change user name to NAS username. same as user on remote ftp server.
 
-lftp -u username -p 989 ftp://<ip addres>  -e " set ssl:verify-certificate no"
+lftp -u username -p 989 ftp://<ip address>  -e " set ssl:verify-certificate no"
 
 # set if error -> ls: Fatal error: Certificate verification: Not trusted
 # there might be safer option.
